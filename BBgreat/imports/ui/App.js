@@ -40,7 +40,8 @@ import Task from './Task.js';
               //reference to be stored in this.refs.name for later use
               ref= "textInput"
               placeholder = "Type to add new tasks"
-            />
+              />
+            </form>
         </header>
 
         <ul>
