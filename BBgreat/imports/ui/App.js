@@ -8,7 +8,8 @@ import Task from './Task.js';
 // App component - represents the whole app
  class App extends Component {
   renderTasks() {
-    return this.props.tasks.map((task) => (
+    return this.props.tasks2.map(/* cast to a task*/(task) => (
+      //map to a Task component key and its associated task prop.
       <Task key={task._id} task={task} />
     ));
   }
@@ -30,6 +31,7 @@ import Task from './Task.js';
 
  export default withTracker(() => {
   return {
-    tasks: Tasks.find({}).fetch(),
+    //tasks prop??
+    tasks2: Tasks.find({}).fetch()
   };
 })(App);
