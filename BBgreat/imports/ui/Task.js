@@ -18,6 +18,7 @@ export default class Task extends Component {
    // so that we can style them nicely in CSS
    const taskClassName = this.props.task.checked ? 'checked' : '';
     return (
+      //references the taskClassname const above.
       <li className={taskClassName}>
         <button className="delete" onClick={this.deleteThisTask.bind(this)}>
           &times;
