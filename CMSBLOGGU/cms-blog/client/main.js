@@ -1,22 +1,16 @@
-import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
-
+import Butter from 'buttercms';
 import './main.html';
-
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
+const butter = Butter('de55d3f93789d4c5c26fb07445b680e8bca843bd');
+Router.route('/', function() {
+  this.render("Home")
 });
-
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
+Router.route('/blog', function() {
+  const resp = await butter.post.list({page: 1, page_size: 10}
+  this.render('Blog', {data: {posts: resp.data.data}});
 });
-
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  },
+Router.route('/blog/:slug', function() {
+  const slug = this.params.slug;
+  const resp = await butter.post.retrieve(slug)
+  const post = resp.data.data;
+  this.render('Post', {data: {post: post}});
 });
